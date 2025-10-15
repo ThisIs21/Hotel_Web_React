@@ -67,12 +67,6 @@ export default function AdventurePark() {
           <p className="text-lg md:text-xl text-gray-200 mb-8 drop-shadow-md">
             Nikmati serunya petualangan alam, eksplorasi outdoor, dan aktivitas seru bersama keluarga.
           </p>
-          <a
-            href="/booking"
-            className="bg-yellow-500 text-black font-semibold px-8 py-4 rounded-full hover:bg-yellow-400 transition-transform transform hover:scale-105 shadow-xl"
-          >
-            Pesan Tiket Sekarang
-          </a>
         </div>
       </section>
 

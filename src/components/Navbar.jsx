@@ -6,26 +6,24 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Handle scroll untuk efek navbar
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Dropdown items
   const dropdownItems = {
     Rooms: ["Deluxe Room", "Suite Room", "Villa"],
-    Facilities: ["Adventure Park", "Swimming Pools", "Fitness Centre", "Parking"],
+    Facilities: ["Adventure Park", "Swimming Pools", "Fitness Centre", "Transportation"],
     Activities: ["Hiking", "Cycling", "Campfire"],
     Dining: ["Restaurant", "Bar", "Cafe"],
     "Meeting Events": ["Conference Hall", "Wedding Venue"],
-    Contact: [], // Item baru tanpa dropdown untuk saat ini
+    Contact: [],
   };
 
-  // Handle dropdown hover dengan timeout untuk mencegah flicker
+  // FIX: dropdown tidak hilang saat hover ke item
   const handleMouseEnter = (menu) => setOpenMenu(menu);
-  const handleMouseLeave = () => setTimeout(() => setOpenMenu(null), 200);
+  const handleMouseLeave = () => setOpenMenu(null);
 
   return (
     <nav
@@ -34,15 +32,17 @@ export default function Navbar() {
       }`}
     >
       <div className="flex items-center justify-between w-full px-6 mx-auto max-w-7xl h-full">
-        {/* Logo - Di ujung kiri, berpindah ke tengah di mobile */}
+        {/* Logo - arahkan ke homepage */}
         <div className="flex items-center space-x-2 md:ml-0">
-          <img
-            src="/img/logo.png"
-            alt="Astro Highland Logo"
-            className={`transition-all duration-300 object-contain ${
-              isScrolled ? "h-20" : "h-30"
-            } ${isMobileMenuOpen ? "mx-auto" : ""}`}
-          />
+          <Link to="/">
+            <img
+              src="/img/logo.png"
+              alt="Astro Highland Logo"
+              className={`transition-all duration-300 object-contain cursor-pointer ${
+                isScrolled ? "h-20" : "h-30"
+              }`}
+            />
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -86,7 +86,11 @@ export default function Navbar() {
                 {menu}
               </button>
               {openMenu === menu && dropdownItems[menu].length > 0 && (
-                <div className="absolute top-full left-0 bg-black border border-gray-800 shadow-lg mt-2 rounded-lg py-2 w-48 z-50">
+                <div
+                  className="absolute top-full left-0 bg-black border border-gray-800 shadow-lg mt-2 rounded-lg py-2 w-48 z-50"
+                  onMouseEnter={() => setOpenMenu(menu)} // biar gak hilang
+                  onMouseLeave={handleMouseLeave}
+                >
                   {dropdownItems[menu].map((item, i) => (
                     <Link
                       key={i}
@@ -113,7 +117,7 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Book Now Button - Di ujung kanan */}
+        {/* Book Now Button */}
         <div className="hidden md:block mr-0">
           <Link
             to="/rooms"

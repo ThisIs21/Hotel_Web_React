@@ -22,12 +22,16 @@ export default function FitnessCentre() {
         />
         <div className="absolute inset-0 bg-black/40"></div>
 
-        <div className="relative z-20 text-center px-6 max-w-3xl flex flex-col items-center justify-center">
-          <h1 className="text-6xl font-extrabold mb-4 text-white drop-shadow-lg">
-            Fitness Centre
+         <div
+          className="relative z-20 text-center px-6 max-w-3xl flex flex-col items-center justify-center"
+          style={{ minHeight: `calc(100vh - ${navHeight}px)` }}
+        >
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-4 text-white leading-tight drop-shadow-lg">
+            Fitness Centre <span className="text-yellow-500">Astro Highland</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 drop-shadow-md">
-            Jaga kebugaran dan relaksasi tubuh di fasilitas terbaik kami.
+          <p className="text-lg md:text-xl text-gray-200 mb-8 drop-shadow-md">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+             Nisi cupiditate optio reiciendis id veniam deleniti reprehenderit hic nesciunt! Id perferendis non doloremque.
           </p>
         </div>
       </section>
